@@ -1,0 +1,29 @@
+'use strict'
+const Webpack = require('webpack');
+const path = require('path');
+
+function getIPAdress() {
+    var interfaces = require('os').networkInterfaces()
+    for (var devName in interfaces) {
+      var iface = interfaces[devName]
+      for (var i = 0; i < iface.length; i++) {
+        var alias = iface[i]
+        if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+          return alias.address
+        }
+      }
+    }
+}
+module.exports = {
+    mode:'development',
+    devtool: 'inline-source-map',
+    plugins: [
+        new Webpack.HotModuleReplacementPlugin()
+    ],
+    devServer: {
+        contentBase: path.resolve(process.cwd(), 'dist'),
+        hot: true,
+        host: getIPAdress(),
+        port: 8088
+    }
+}

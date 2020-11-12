@@ -1,0 +1,10 @@
+#app{
+    color:purple;
+}
+.box{
+    background-color: red;
+    width:100px;
+    height:100px;
+    border:1px solid #000000;
+    color:#fff;
+}
