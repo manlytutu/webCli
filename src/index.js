@@ -27,7 +27,7 @@ if (command === 'dev') {
           throw err
         }
         if (stats.hasErrors()) {
-          console.log().log('[Lovely-CLI]', stats.toString());
+          console.log('[Lovely-CLI]', stats.toString());
         }
         process.stdout.write(stats.toString({
               colors: true,
