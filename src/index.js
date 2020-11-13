@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict'
-const command = process.argv[2];
+
+const commander = require('commander');
 const Webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const WebpackDevServer = require('webpack-dev-server');
@@ -8,21 +9,27 @@ const commonConfig = require('./webpack.common.config');
 const devConfig = require('./webpack.dev.config');
 const prodConfig = require('./webpack.prod.config');
 
+
 const defaultDevConfig = merge(commonConfig, devConfig);
 const defaultProdConfig = merge(commonConfig, prodConfig);
 
+commander
+    .usage('<command>')
+commander
+    .command('dev')
+    .description('project is running at http://10.8.27.168:8088')
+    .action(()=>{
+        const devServerOptions = defaultDevConfig.devServer;
+        WebpackDevServer.addDevServerEntrypoints(defaultDevConfig, devServerOptions);
 
-if (command === 'dev') {
-    const devServerOptions = defaultDevConfig.devServer;
-    WebpackDevServer.addDevServerEntrypoints(defaultDevConfig, devServerOptions);
-
-    const compiler = Webpack(defaultDevConfig);
-    const devServer = new WebpackDevServer(compiler, devServerOptions);
-    devServer.listen(8088);
-
-} else if (command === 'build') {
-    console.log(defaultProdConfig);
-    Webpack(defaultProdConfig, function (err, stats) {
+        const compiler = Webpack(defaultDevConfig);
+        const devServer = new WebpackDevServer(compiler, devServerOptions);
+        devServer.listen(8088);
+    })
+commander
+    .command('build')
+    .action(()=>{
+        Webpack(defaultProdConfig, function (err, stats) {
         if (err) {
           throw err
         }
@@ -36,8 +43,8 @@ if (command === 'dev') {
               chunks: false,
               chunkModules: false
             }) + '\n\n')
-      });
+        });
+    })
 
-} else {
-    console.log('I am a lovely CLI.')
-}
+
+commander.parse(process.argv)
