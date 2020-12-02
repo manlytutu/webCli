@@ -9,15 +9,15 @@ module.exports = {
     entry: path.resolve(process.cwd(),'src/main.js'),
     output: {
         path: path.resolve(process.cwd(), 'dist'),
-        filename: '[name].bundle.js'
+        filename: '[name].js',
+        chunkFilename: '[name].chunk.js'
     },
     plugins:[
         new HtmlWebpackPlugin({
             title:'webCli',
-            template: path.resolve(process.cwd(), 'index.html')
+            template: path.resolve(process.cwd(), 'src/index.html')
         }),
         new CleanWebpackPlugin(),
-        
     ],
     module:{
         rules:[
@@ -28,6 +28,7 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
+                use: ['file-loader'],
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -40,7 +41,12 @@ module.exports = {
             {
                 test: /\.xml$/i,
                 use: ['xml-loader'],
-            }
+            },
+            {
+                test: /\.vue$/,
+                exclude: /node_modules/,
+                use: ['vue-loader']
+            },
         ]
     }
 }

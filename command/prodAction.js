@@ -1,11 +1,11 @@
 const Webpack = require('webpack');
-const commonConfig = require('../src/webpack.common.config');
-const prodConfig = require('../src/webpack.prod.config');
+const commonConfig = require('../config/webpack.common.config');
+const prodConfig = require('../config/webpack.prod.config');
 const { merge } = require('webpack-merge');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const chalk = require('chalk');
 
-async function prodAction(name,options){
+async function prodAction(options){
     var defaultProdConfig = merge(commonConfig, prodConfig);
     if(options.progress || options.p){
         defaultProdConfig = merge(defaultProdConfig,{

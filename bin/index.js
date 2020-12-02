@@ -13,9 +13,9 @@ commander
         require('../command/devAction')
     })
 commander
-    .command('build <name>')
+    .command('build')
     .option('-p, --progress','show compile progress') //打印出编译进度的百分比值
-    .action((name,options)=>{
-        require('../command/prodAction')(name,options)
+    .action((options)=>{
+        require('../command/prodAction')(options)
     })
 commander.parse(process.argv)

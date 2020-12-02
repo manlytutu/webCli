@@ -1,6 +1,12 @@
-import '../style.css'
-import Test from './test.js';
+import './css/style.css'
+import './css/test.css'
+import Test from './js/test.js';
 
 const app = document.querySelector('#app')
-app.innerHTML = '<h1>Lovely CLI</h1><div class="box">Lovely CLI</div><h1>Lovely CLI</h1>'
+var htmlStr = `
+    <header class="header-section">头部</header>
+    <div class="content-section">内容</div>
+    <footer class="footer-section">底部</footer>
+`
+app.innerHTML = htmlStr;
 Test();
