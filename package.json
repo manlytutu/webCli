@@ -6,9 +6,12 @@
     "webCli": "bin/index.js"
   },
   "scripts": {
-    "dev": "webCli dev",
-    "build": "webCli build"
+    "dev": "cross-env NODE_ENV=development webCli dev",
+    "build": "cross-env NODE_ENV=production webCli build"
   },
+  "sideEffects": [
+    "./src/**/*.css"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {},
@@ -21,13 +24,21 @@
     "chalk": "^4.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "commander": "^6.2.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
+    "css-minimizer-webpack-plugin": "^1.1.5",
+    "cssnano": "^4.1.10",
     "csv-loader": "^3.0.3",
     "file-loader": "^6.2.0",
+    "glob": "^7.1.6",
+    "glob-all": "^3.2.1",
+    "html-webpack-externals-plugin": "^3.8.0",
     "html-webpack-plugin": "^5.0.0-alpha.3",
     "mini-css-extract-plugin": "^1.2.1",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "postcss-loader": "^4.1.0",
     "progress-bar-webpack-plugin": "^2.1.0",
+    "purgecss-webpack-plugin": "^3.0.0",
     "shebang-loader": "^0.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.4.0",
