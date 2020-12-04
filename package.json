@@ -1,6 +1,6 @@
 {
-  "name": "web-cli",
-  "version": "1.0.3",
+  "name": "@sjkh/web-cli",
+  "version": "1.0.0",
   "description": "",
   "bin": {
     "webCli": "bin/index.js"
