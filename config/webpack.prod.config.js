@@ -12,9 +12,9 @@ module.exports = {
         }),
     ],
     module:{
-        rules:{
+        rules:[{
             test:/\.css$/i,
             use:[MiniCssExtractPlugin.loader,'css-loader']
-        }
+        }]
     }
 }
