@@ -1,5 +1,5 @@
-import './css/style.css'
-import './css/test.css'
+import '@/css/style.css'
+import '@/css/test.css'
 import Test from './js/test.js';
 
 const app = document.querySelector('#app')

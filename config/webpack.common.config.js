@@ -8,15 +8,14 @@ const CssMinimizerWebpackPlugin = require("css-minimizer-webpack-plugin");
 const PurgeCSSPlugin = require('purgecss-webpack-plugin');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 
-
-
 const devMode = process.env.NODE_ENV === 'development'; // 是否是开发模式
-// console.log(devMode);
-// console.log(process.env.NODE_ENV);
-const glob = require('glob');
+
+const glob = require('glob-all');
 const PATHS = {
-    src: path.join(__dirname, 'src')
+    src: path.join(__dirname,'..','src')
 }
+// console.log(__dirname); //  /Users/vicky/webCli/config
+// console.log(PATHS.src); //     /Users/vicky/webCli/src
 
 module.exports = {
     entry: path.resolve(process.cwd(),'src/main.js'),
@@ -39,7 +38,8 @@ module.exports = {
         }),
         //删除无用的css代码 (有问题 打包之后将有用的css也都删除了)
         // new PurgeCSSPlugin({
-        //     paths: glob.sync(`${PATHS.src}/**/*`),
+        //     paths: glob.sync([path.resolve(path.resolve(), `src/**/*.css`)]),
+        //     whitelist:['footer-section']
         // }),
         //动态添加CDN
         // new HtmlWebpackExternalsPlugin({
@@ -60,6 +60,11 @@ module.exports = {
         //     ]
         // })
     ],
+    resolve:{
+        alias:{
+            '@': path.join(__dirname, '..', 'src'),
+        }
+    },
     optimization:{
         minimize:true,
         minimizer:[
