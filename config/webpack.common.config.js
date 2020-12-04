@@ -3,12 +3,12 @@
 const path = require('path');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const CssMinimizerWebpackPlugin = require("css-minimizer-webpack-plugin");
 const PurgeCSSPlugin = require('purgecss-webpack-plugin');
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 
-const devMode = process.env.NODE_ENV === 'development'; // 是否是开发模式
+// const devMode = process.env.NODE_ENV === 'development'; // 是否是开发模式
 
 const glob = require('glob-all');
 const PATHS = {
@@ -31,11 +31,7 @@ module.exports = {
         }),
         //每次打包💰自动清空dist文件夹
         new CleanWebpackPlugin(),
-        //从js中抽离css
-        new MiniCssExtractPlugin({
-            filename: '[name].[contenthash:7].css',
-            chunkFilename: "[id].css"
-        }),
+        
         //删除无用的css代码 (有问题 打包之后将有用的css也都删除了)
         // new PurgeCSSPlugin({
         //     paths: glob.sync([path.resolve(path.resolve(), `src/**/*.css`)]),
@@ -97,7 +93,7 @@ module.exports = {
         rules:[
             {
                 test:/\.css$/i,
-                use:[ devMode ? 'style-loader': MiniCssExtractPlugin.loader,'css-loader']
+                use:[ 'style-loader','css-loader']
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
